@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  marvel.heroes:
+    image: ${DOCKER_REGISTRY-}marvelheroes
+    build:
+      context: .
+      dockerfile: Marvel.Heroes/Dockerfile
+
+  marvel.villains:
+    image: ${DOCKER_REGISTRY-}marvelvillains
+    build:
+      context: .
+      dockerfile: Marvel.Villains/Dockerfile
+
+  marvel.world:
+    image: ${DOCKER_REGISTRY-}marvelworld
+    build:
+      context: .
+      dockerfile: Marvel.World/Dockerfile
+    environment:
+        - Services__Heroes=http://marvel.heroes
+        - Services__Villains=http://marvel.villains
+
+

@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+
+    marvelweb:
+        build: 
+            context: ./marvel-world
+            dockerfile: Dockerfile
+            args:
+                - ARG_REACT_APP_MARVEL=http://localhost:5002/api
+        ports: 
+            - "8080:80"
+        # environment:
+        #     - API_URL=DEFAULT
+        
+    #     # depends_on:
+    #     #     - marvelbackend
+  
+    marvel.heroes:
+        image: ${DOCKER_REGISTRY-}marvelheroes
+        build:
+            context: ./marvel
+            dockerfile: ./Marvel.Heroes/Dockerfile
+
+    marvel.villains:
+        image: ${DOCKER_REGISTRY-}marvelvillains
+        build:
+            context: ./marvel
+            dockerfile: ./Marvel.Villains/Dockerfile
+
+    marvel.world:
+        image: ${DOCKER_REGISTRY-}marvelworld
+        build:
+            context: ./marvel
+            dockerfile: ./Marvel.World/Dockerfile
+        ports: 
+            - "5002:5000"
+        environment:
+            - ASPNETCORE_URLS=http://*:5000
+            - Services__Heroes=http://marvel.heroes
+            - Services__Villains=http://marvel.villains
