@@ -5,7 +5,7 @@ properties:
   containers:
   - name: nginx-reverseproxy
     properties:
-      image: rgdockertrainning.azurecr.io/marvelworld_nginx-reverseproxy:latest
+      image: rgdockertrainning.azurecr.io/marvelworldnginxprod-reverse-proxy:latest
       resources:
         requests:
           cpu: 1
@@ -18,7 +18,7 @@ properties:
       image: rgdockertrainning.azurecr.io/marvelworld:latest
       environmentVariables:
           - name: 'ASPNETCORE_URLS'
-            value: 'http://*:5000'
+            value: 'http://localhost:5000'
           - name: 'Services__Heroes'
             value: 'http://localhost:5002'
           - name: 'Services__Villains'
