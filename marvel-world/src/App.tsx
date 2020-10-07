@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <div>Current environment: <b>{env("NODE_ENV")}</b>.</div>
-      <div> REACT_APP_API_URL SIN REACT_aPP: <b>{env("API_URL")}</b>.</div>
+      <div> REACT_APP_API_URL: <b>{env("API_URL")}</b>.</div>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.

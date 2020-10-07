@@ -2,12 +2,34 @@ version: '3.4'
 
 services:
 
+    nginx-reverseproxy:
+        build: 
+            context: ./nginx
+            dockerfile: Dockerfile
+        volumes:
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        ports:
+            - "80:80"
+
+    # reverse-proxy:
+    #     image: nginx:1.17.10
+    #     container_name: reverse_proxy_demo
+    #     depends_on:
+    #         - marvelweb
+    #         - marvel.heroes
+    #         - marvel.villains
+    #         - marvel.world
+    #     volumes:
+    #       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    #     ports:
+    #       - 80:80
+
     marvelweb:
         build: 
             context: ./marvel-world
             dockerfile: Dockerfile
             args:
-                - ARG_REACT_APP_MARVEL=http://localhost:5002/api
+                - ARG_REACT_APP_MARVEL=http://localhost/api/marvelworld
         ports: 
             - "8080:80"
         # environment:
@@ -15,7 +37,7 @@ services:
         
     #     # depends_on:
     #     #     - marvelbackend
-  
+   
     marvel.heroes:
         image: ${DOCKER_REGISTRY-}marvelheroes
         build:

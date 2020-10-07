@@ -1,20 +1,18 @@
 apiVersion: 2018-10-01
-location: northeurope
-name: 911scenarioaci
+location: westeurope
+name: acibackend
 properties:
   containers:
-  - name: frontend
+  - name: nginx-reverseproxy
     properties:
-      image: rgdockertrainning.azurecr.io/marvelworld_marvelweb:latest
-      environmentVariables:
-          - name: 'REACT_APP_API_URL'
-            value: 'http://marvelworldtest.westeurope.azurecontainer.io:5000/api'
+      image: rgdockertrainning.azurecr.io/marvelworld_nginx-reverseproxy:latest
       resources:
         requests:
           cpu: 1
           memoryInGb: 1.5
       ports:
       - port: 80
+  
   - name: backend
     properties:
       image: rgdockertrainning.azurecr.io/marvelworld:latest
@@ -58,16 +56,16 @@ properties:
   osType: Linux
   ipAddress:
     type: Public
-    dnsNameLabel: marvelworldtest
+    dnsNameLabel: marvelworldtestbackend
     ports:
     - protocol: tcp
       port: '80'
-    - protocol: tcp
-      port: '5000'
-    - protocol: tcp
-      port: '5001'
-    - protocol: tcp
-      port: '5002'
+    # - protocol: tcp
+    #   port: '5000'
+    # - protocol: tcp
+    #   port: '5001'
+    # - protocol: tcp
+    #   port: '5002'
   imageRegistryCredentials:
   - server: rgdockertrainning.azurecr.io
     username: rgdockertrainning

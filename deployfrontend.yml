@@ -1,0 +1,32 @@
+apiVersion: 2018-10-01
+location: westeurope
+name: acifrontend
+properties:
+  containers:
+  - name: frontend
+    properties:
+      image: rgdockertrainning.azurecr.io/marvelworld_marvelweb:latest
+      environmentVariables:
+          - name: 'REACT_APP_API_URL'
+            value: 'http://marvelworldtestbackend.westeurope.azurecontainer.io/api/marvelworld'
+            # value: 'http://marvelworldtestbackend.westeurope.azurecontainer.io:5000/api'
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 80
+ 
+  osType: Linux
+  ipAddress:
+    type: Public
+    dnsNameLabel: marvelwfrontend
+    ports:
+    - protocol: tcp
+      port: '80'
+  imageRegistryCredentials:
+  - server: rgdockertrainning.azurecr.io
+    username: rgdockertrainning
+    password: xfrYCyauu5hoEyR+kobLKQ7mKEm=ujnA
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
