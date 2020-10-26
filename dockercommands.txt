@@ -1,0 +1,7 @@
+docker run busybox echo "hello sdf"
+docker run  myimage /bin/sh
+docker run -it busybox sh
+docker ps -a | grep tsuedbroecker/cns-workshop-tools:v1
+docker run -dit --name demo "tsuedbroecker/cns-workshop-tools:v1" /bin/bash
+
+https://github.com/docker/kitematic/releases
